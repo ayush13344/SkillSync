@@ -71,7 +71,7 @@ module.exports.logout = async (req, res, next) => {
 };
 
 module.exports.showSkillCards = async (req, res) => {
-  const skills = ['React', 'Node.js', 'Python', 'Java', 'MongoDB'];
+  const skills = user.skill[];
   res.render('index', { skills });
 };
 
@@ -91,18 +91,3 @@ module.exports.getUsersBySkill = async (req, res) => {
   }
 };
 
-module.exports.getUsersBySkill = async (req, res) => {
-  const skill = req.query.skill;
-  if (!skill) return res.redirect('/');
-
-  try {
-    const users = await User.find({
-      skills: { $regex: new RegExp(`^${skill}$`, 'i') }
-    });
-
-    res.render('users', { skill, users });
-  } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).send('Server Error');
-  }
-};
