@@ -71,7 +71,7 @@ module.exports.logout = async (req, res, next) => {
 };
 
 module.exports.showSkillCards = async (req, res) => {
-  const skills = user.skill[];
+  const skills = User.skill[];
   res.render('index', { skills });
 };
 
